@@ -116,6 +116,19 @@ To package your application as a war in order to deploy it to an application ser
 ./mvnw -Pprod,war clean verify
 ```
 
+## Deploying on AWS Elastic Beanstalk 
+You may choose to either upload a jar or war file. Consider using AWS RDS DB such as MySql and note the host name username and password for updating in environment variables
+Add following environment variables in software configuraiton once the instance is created
+
+Env Key  | Env Value
+------------- | -------------
+SERVER_PORT  | 5000
+SPRING_DATASOURCE_USERNAME  | (db-username)
+SPRING_DATASOURCE_PASSWORD  | (db-password)
+SPRING_DATASOURCE_URL  | `jdbc:mysql://<HOSTNAME>:3306/bitslogin?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true`
+
+The base DB schema would be created during application boot up by liquibase
+
 ## Testing
 
 To launch your application's tests, run:
